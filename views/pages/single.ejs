@@ -1,0 +1,34 @@
+<script>
+    function getValue () {
+        var content = $('#summernote').summernote('code');
+        document.getElementById('text').value = content;
+        var markup = $('.text-area').summernote('code');
+        $('#summernote').summernote('destroy');
+        return true;
+    };
+
+    function startEdit () {
+        $('.text-area').summernote({focus: true});
+    };
+</script>
+
+<div class="jumbotron text-center">
+    <h1><%= ticket.name %></h1>
+    <p><a href="<%= ticket.link %>"><%= ticket.link %></a><br>Ticket Status: <%= ticket.status %></p>
+    <br>
+</div>
+
+<div id="summernote" class="text-area" onclick="startEdit()">
+    placeholder
+    <%= ticket.notes %>
+</div>
+<br>
+<form onsubmit="return getValue()" method="post" action="/edit" id="text-edit">
+    <div class="form-group">
+        <input type="hidden" name="text" id="text">
+        <input type="hidden" name="slug" value="<%= ticket.slug %>">
+    </div>
+    <div class="text-right">
+        <input type="submit" class="btn btn-primary">
+    </div>
+</form>

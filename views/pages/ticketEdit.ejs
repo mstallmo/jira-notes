@@ -1,0 +1,40 @@
+<div class="jumbotron text-center">
+    <h1>Edit Ticket</h1>
+</div>
+
+<form method="post" action="/edit">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Name" value="<%= ticket.name %>">
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" rows="3" name="description"><%= ticket.link %></textarea>
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <select class="form-control" name="status" id="status">
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="In Peer Review">In Peer Review</option>
+            <option value="Ready for QA">Ready for QA</option>
+            <option value="In QA">In QA</option>
+            <option value="Ready For Release">Ready For Release</option>
+            <option value="Released">Released</option>
+            <option value="Closed">Closed</option>
+        </select>
+    </div>
+    <div class="text-right">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+</form>
+
+<script>
+    var temp = <%- JSON.stringify(ticket.status) %>;
+    var mySelect = document.getElementById('status');
+
+    for(var i, j =0; i = mySelect.options[j]; j++) {
+        if(i.value == temp) {
+            mySelect.selectedIndex = j;
+            break;
+        }
+    }
+</script>
